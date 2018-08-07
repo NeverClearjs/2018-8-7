@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+ 
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+   
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Hello World</title>
+</head>
+
+<body>
+    <div class="app">
+        <h1>PhoneGap！！</h1>
+        <input type="button" value="alert" id="btn1">
+        <input type="button" value="confirm" id="btn2">
+        <input type="button" value="beep" id="btn3">
+        <input type="button" value="vibrate" id="btn4">
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    
+    <script type="text/javascript">
+       document.addEventListener('deviceready', function(){
+        var oAlert=document.getElementById("btn1");
+        var oConfirm=document.getElementById("btn2");
+        var oBeep=document.getElementById("btn3");
+        var oVibrate=document.getElementById("btn4");
+
+        oAlert.addEventListener("touchstart",function(){
+            navigator.notification.alert("信息", function(){
+            window.alert('要办的事情')
+        }, "标题","确认");
+        });
+        oConfirm.onclick=function(){
+        navigator.notification.confirm("信息", function(res){
+            window.alert("用户选择了",res)
+        }, "标题", "确认，取消");
+        };
+        oBeep.onclick=function(){
+            navigator.notification.beep(1);
+        };
+        oVibrate.onclick=function(){
+            navigator.notification.vibrate(2500);
+        }
+       
+       }, false);
+    </script>
+</body>
+
+</html>
